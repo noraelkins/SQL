@@ -1,0 +1,33 @@
+--Create a grorcery store databas3e
+
+CREATE TABLE Store (id INTEGER PRIMARY KEY, Name TEXT, Price INTEGER, Quantity INTEGER, popularity INTEGER);
+
+INSERT INTO Store VALUES (1, "Apple", 1, 20, 99); 
+INSERT INTO Store VALUES (2, "Orange", 1, 20, 98);
+INSERT INTO Store VALUES (3, "Pineapple", 5,25, 100); 
+INSERT INTO Store VALUES (4, "Grapes", 3, 30, 75); 
+INSERT INTO Store Values (5, "Kiwi", 3, 30, 88); 
+INSERT INTO Store Values (6, "Grapefruit", 2, 20, 50); 
+INSERT INTO STore Values (7, "Tomato", 1, 55, 50); 
+INSERT INTO STore Values (8, "Mango", 3, 10, 100);
+INSERT INTO STore Values (9, "Peach", 2, 15, 80);
+INSERT INTO STore Values (10, "Plum", 2, 20, 66);
+INSERT INTO STore Values (11, "Strawberry", 4, 40, 100);
+INSERT INTO STore Values (12, "Blueberry", 5, 50, 88); 
+INSERT INTO STore Values (13, "Dragonfruit", 3, 20, 33);
+INSERT INTO STore Values (14, "Pear", 3, 59, 99); 
+INSERT INTO STore Values (15, "Boisenberry", 5, 44, 99);
+
+--Display the database ordered by price
+SELECT *FROM Store 
+ORDER BY Price;
+
+--What is the average price of the fruit?
+SELECT AVG(price) "Avg price"
+FROM store; 
+
+--What are the 10 most popular items?
+SELECT Name, price, popularity
+FROM store
+order by popularity desc
+limit 10;
