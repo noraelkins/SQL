@@ -1,0 +1,139 @@
+ /* Create table about the people and what they do here */
+ 
+ Create TABLE celebrities (
+ id INTEGER PRIMARY KEY AUTOINCREMENT, 
+ name TEXT, 
+ character TEXT,
+ show TEXT 
+  ); 
+ 
+ INSERT INTO celebrities (name, character, show) VALUES ("Ariana Madix", "Self", "Vanderpump"); 
+ INSERT INTO celebrities (name, character, show)  VALUES ("Matthew Gray Gubler", "Dr. Spencer Reid", "Criminal Minds"); 
+INSERT INTO celebrities (name, character, show)  VALUES ("Kevin Costner", "John Dutton", "Yellowstone"); 
+INSERT INTO celebrities (name, character, show)  VALUES ("Kim Kardashian", "Self", "Kardashians");
+ INSERT INTO celebrities (name, character, show)  VALUES ("Shemar Moore", "Derek Morgan", "Criminal Minds");
+  INSERT INTO celebrities (name, character, show)  VALUES ("Sophie Turner", "Sansa Stark", "Game of Thrones");
+  INSERT INTO celebrities (name, character, show) 
+  VALUES ("Kit Harrington", "Jon Snow", "Game of Thrones");
+   INSERT INTO celebrities (name, character, show) 
+  VALUES ("Emelia Clarke", "Danaerys Targaryan", "Game of Thrones"); 
+  INSERT INTO celebrities (name, character, show) VALUES ("Lala Kent", "Self", "Vanderpump"); 
+  INSERT INTO celebrities (name, character, show) VALUES 
+  ("Kirsten Vangness", "Peneope Garcia", "Criminal Minds"); 
+  INSERT INTO celebrities (name, character, show) VALUES ("A.J. Cook", "Jennifer Jareau", "Criminal Minds"); 
+  INSERT INTO celebrities (name, character, show) VALUES ("Thomas Gibson", "Aaron Hotchner", "Criminal Minds");
+  INSERT INTO celebrities (name, character, show) VALUES ("Paget Brewster", "Emily Prentiss", "Criminal Minds");
+  INSERT INTO celebrities (name, character, show) VALUES ("Mandy Patinkin", "Jason Gideon", "Criminal Minds"); 
+  INSERT INTO celebrities (name, character, show) VALUES ("Khloe Kardashian", "Self", "Kardashians"); 
+  
+  CREATE TABLE length (
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  show_title TEXT,
+  run_time INTEGER, 
+  seasons INTEGER); 
+  
+ INSERT INTO length (show_title, run_time, seasons) VALUES 
+ ("Game of Thrones", 50, 8); 
+ INSERT INTO length (show_title, run_time, seasons) VALUES 
+ ("Criminal Minds", 45, 16); 
+ INSERT INTO length (show_title, run_time, seasons) VALUES 
+ ("Vanderpump", 45, 10); 
+ INSERT INTO length (show_title, run_time, seasons) VALUES 
+ ("Kardashians", 45, 3); 
+ 
+ 
+ CREATE table genre (
+ id INTEGER PRIMARY KEY,
+ genre TEXT, 
+ show_name TEXT
+ ); 
+ 
+ INSERT INTO genre (genre, show_name) VALUES ("Fantasy", "Game of Thrones"); 
+ INSERT INTO genre (genre, show_name) VALUES  ("Crime", "Criminal Minds"); 
+ INSERT INTO genre (genre, show_name) VALUES ("Reality", "Vanderpump");
+ INSERT INTO genre (genre, show_name) VALUES ("Reality", "Kardashians"); 
+ 
+ CREATE table episodes (
+ id INTEGER PRIMARY KEY,
+ character TEXT,
+ no_episodes INTEGER); 
+ 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Kim Kardashian", 12); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Khloe Kardashian", 11); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Ariana Madix", 146); 
+ INSERT INTO episodes (character, no_episodes) VALUES
+ ("Lala Kent", 157); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Penelope Garcia", 331);
+ INSERT INTO episodes (character, no_episodes) VALUES ("Dr. Spencer Reid", 323); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Jennifer Jareau", 312); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Aaron Hotchner", 257); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Emily Prentiss", 204); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Derek Morgan", 254); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Jason Gideon", 51); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Jon Snow", 62); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Sansa Stark", 59); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("Danaerys Targaryan", 92); 
+ INSERT INTO episodes (character, no_episodes) VALUES ("John Dutton", 47); 
+ 
+ 
+ SELECT * FROM celebrities;
+ 
+ SELECT * FROM length; 
+
+ SELECT show, character, name, seasons from celebrities 
+ join length 
+ ON celebrities.show = length.show_title
+ ORDER BY seasons;  
+ 
+ SELECT show, seasons from celebrities 
+ join length 
+ ON celebrities.show = length.show_title
+ GROUP BY show;  
+ 
+ SELECT celebrities.show, genre.genre 
+ FROM celebrities 
+ JOIN genre
+ ON celebrities.show = genre.show_name
+ GROUP BY show; 
+ 
+ 
+ SELECT genre.genre, genre.show_name, length.seasons 
+ FROM genre 
+ JOIN length
+ ON genre.show_name = length.show_title
+ group by show_name
+ order by seasons; 
+ 
+ SELECT length.show_title, length.seasons 
+ FROM length
+ where seasons >=10
+ order by seasons; 
+ 
+ SELECT celebrities.name, genre.show_name
+ FROM celebrities 
+ join genre 
+ on celebrities.show = genre.show_name
+ where show_name="Game of Thrones";  
+ 
+ 
+ SELECT celebrities.name, episodes.character, episodes.no_episodes
+ FROM episodes
+ join celebrities
+ on celebrities.character = episodes.character 
+ WHERE celebrities.show = "Criminal Minds"
+ GROUP by name
+ order by no_episodes
+ ; 
+ 
+  SELECT celebrities.name, episodes.character, episodes.no_episodes
+ FROM episodes
+ join celebrities
+ on celebrities.character = episodes.character 
+ WHERE celebrities.show = "Game of Thrones"AND  episodes.no_episodes > 60; 
+ 
+ 
+ SELECT avg(no_episodes) from episodes; 
+ 
+ SELECT character, max(no_episodes) from episodes; 
+ 
+ SELECT character, min (no_episodes) from episodes; 
